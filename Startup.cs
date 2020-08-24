@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using sanjosefam_backend.Data;
 using sanjosefam_backend.Data.AuthRepository;
+using sanjosefam_backend.Services.PostService;
 using sanjosefam_backend.Services.UserService;
 
 namespace sanjosefam_backend
@@ -48,6 +49,8 @@ namespace sanjosefam_backend
 
       services.AddScoped<IUserService, UserService>();
       services.AddScoped<IAuthRepository, AuthRepository>();
+      services.AddScoped<IPostService, PostService>();
+
       services
         .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
@@ -60,6 +63,7 @@ namespace sanjosefam_backend
             ValidateAudience = false
           };
         });
+      services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

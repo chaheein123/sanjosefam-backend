@@ -10,8 +10,8 @@ using sanjosefam_backend.Data;
 namespace sanjosefam_backend.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20200808193702_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20200824065429_InitiaMigration")]
+    partial class InitiaMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,28 @@ namespace sanjosefam_backend.Migrations
                 .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("sanjosefam_backend.Models.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(3200)")
+                        .HasMaxLength(3200);
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Posts");
+                });
 
             modelBuilder.Entity("sanjosefam_backend.Models.User", b =>
                 {
@@ -41,14 +63,36 @@ namespace sanjosefam_backend.Migrations
                         .HasColumnType("nvarchar(320)")
                         .HasMaxLength(320);
 
+                    b.Property<string>("UserImg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserIntro")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("UserJob")
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
+
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("UserRealName")
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("sanjosefam_backend.Models.Post", b =>
+                {
+                    b.HasOne("sanjosefam_backend.Models.User", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

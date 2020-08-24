@@ -10,7 +10,7 @@ using sanjosefam_backend.Services.UserService;
 namespace sanjosefam_backend.Controllers
 {
   [Authorize]
-  [Route("api/users")]
+  [Route("users")]
   [ApiController]
   public class UserController : ControllerBase
   {

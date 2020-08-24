@@ -11,6 +11,8 @@ namespace sanjosefam_backend.Data
     }
 
     public DbSet<User> Users { get; set; }
+
+    public DbSet<Post> Posts { get; set; }
   }
   //public class MainContext : IdentityContext
   //{

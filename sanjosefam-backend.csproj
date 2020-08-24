@@ -16,6 +16,9 @@
     <Folder Include="Services\UserService\" />
     <Folder Include="Dtos\UserDto\" />
     <Folder Include="Data\AuthRepository\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Services\PostService\" />
+    <Folder Include="Dtos\PostDto\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />

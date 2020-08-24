@@ -9,7 +9,7 @@ using sanjosefam_backend.Models;
 
 namespace sanjosefam_backend.Controllers
 {
-  [Route("api/auth")]
+  [Route("auth")]
   [ApiController]
   public class AuthController : ControllerBase
   {
@@ -31,7 +31,8 @@ namespace sanjosefam_backend.Controllers
       {
         Secure = false,
         HttpOnly = false,
-        SameSite = SameSiteMode.Strict
+        SameSite = SameSiteMode.Strict,
+        Expires = DateTime.UtcNow.AddDays(7)
       };
 
       Response.Cookies.Append("token", response.Data, cookieOptions);
@@ -49,7 +50,8 @@ namespace sanjosefam_backend.Controllers
       {
         Secure = false,
         HttpOnly = false,
-        SameSite = SameSiteMode.Strict
+        SameSite = SameSiteMode.Strict,
+        Expires = DateTime.UtcNow.AddDays(7)
       };
       Response.Cookies.Append("token", response.Data, cookieOptions);
       response.Data = null;
