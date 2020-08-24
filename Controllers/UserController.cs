@@ -9,7 +9,7 @@ using sanjosefam_backend.Services.UserService;
 
 namespace sanjosefam_backend.Controllers
 {
-  [Authorize]
+  //[Authorize]
   [Route("users")]
   [ApiController]
   public class UserController : ControllerBase
@@ -21,12 +21,12 @@ namespace sanjosefam_backend.Controllers
       _userService = userService;
     }
 
-    //[AllowAnonymous]
-    [HttpGet]
-    public async Task<IActionResult> GetAllUsers()
+    [HttpGet("getuserinfo/{userName}", Name = "GetUserInfoByUserName")]
+    public async Task<IActionResult> GetUserInfo(string userName)
     {
-      return Ok(await _userService.GetAllUsers());
-      
+      var userInfo = await _userService.GetUserInfo(userName);
+      if (userInfo == null) return BadRequest();
+      return Ok(userInfo);
     }
 
   }

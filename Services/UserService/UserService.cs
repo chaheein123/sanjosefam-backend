@@ -21,27 +21,19 @@ namespace sanjosefam_backend.Services.UserService
       _mapper = mapper;
     }
 
-    public async Task<ServiceResponse<List<UserReadDto>>> GetAllUsers()
-    {
-      var users = await _context.Users.Select(user => _mapper.Map<UserReadDto>(user)).ToListAsync();
-
-      var response = new ServiceResponse<List<UserReadDto>>();
-      response.Data = users;
-      return response;
-    }
-
-    //public async Task<ServiceResponse<User>> CreateUser(User user)
+    //public async Task<ServiceResponse<List<UserReadDto>>> GetAllUsers()
     //{
-    //  await _context.AddAsync(user);
-    //  bool changeSaved = await _context.SaveChangesAsync() >= 0;
+    //  var users = await _context.Users.Select(user => _mapper.Map<UserReadDto>(user)).ToListAsync();
 
-    //  if (!changeSaved)
-    //  {
-    //    return new ServiceResponse<User>() { Message = "로드하는 중에 오류가 발생했습니다. 다시 시도하세요", Success = false };
-    //  }
-
-    //  ServiceResponse<User> serviceResponse = new ServiceResponse<User> { Data = user };
-    //  return serviceResponse;
+    //  var response = new ServiceResponse<List<UserReadDto>>();
+    //  response.Data = users;
+    //  return response;
     //}
+
+    public async Task<UserReadDto> GetUserInfo(string userName)
+    {
+      var user = _mapper.Map<UserReadDto>(await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName));
+      return user;
+    }
   }
 }

@@ -8,7 +8,6 @@ namespace sanjosefam_backend.Services.UserService
 {
   public interface IUserService
   {
-    Task<ServiceResponse<List<UserReadDto>>> GetAllUsers();
-    //Task<ServiceResponse<User>> CreateUser(User user);
+    public Task<UserReadDto> GetUserInfo(string userName);
   }
 }
