@@ -30,10 +30,7 @@ namespace sanjosefam_backend.Services.PostService
 
     public async Task<bool> CreatePost(PostCreateDto request)
     {
-      Console.WriteLine("hihihihi");
-      Console.WriteLine("This the id " + GetUserId());
       User user = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
-      Console.WriteLine("this is the user !!! " + user.UserEmail);
       if (user == null) return false;
       Post post = new Post { User = user, Content = request.Content };
 
