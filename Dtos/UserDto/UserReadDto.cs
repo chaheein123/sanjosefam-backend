@@ -7,7 +7,7 @@ namespace sanjosefam_backend.Dtos.UserDto
 
     public string UserName { get; set; }
 
-    public string UserEmail { get; set; }
+    //public string UserEmail { get; set; }
 
     public string UserJob { get; set; }
 
